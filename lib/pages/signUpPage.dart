@@ -121,40 +121,39 @@ class SignUpState extends State<SignUp> {
                 _buildPhoneNumber(),
                 SizedBox(height: 50),
               Container(
-                height: 50.0,
-                child: RaisedButton(
-                onPressed: () {
-                setState(() {
-                Get.to(Home());
-                  });
-                    },
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
-                padding: EdgeInsets.all(0.0),
-                child: Ink(
-                decoration: BoxDecoration(
-                gradient: LinearGradient(
-                colors: [Color(0xff4ABB47), Color(0xff97D136)],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                ),
-                    borderRadius: BorderRadius.circular(30.0)
-                  ),
-                child: Container(
-              constraints: BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
-                  alignment: Alignment.center,
-                child: const Text(
-                  "Sign Up",
-                      textAlign: TextAlign.center,
-                       style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      ),
-                      ),
-                    ),
-                          ),
-                              ),
-
-                    ),
+                height: 65.0,
+                
+                child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: ElevatedButton(
+                   onPressed: () {
+                     setState(() {
+                       Get.to(Home());
+                     });
+                      },
+                  style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20))),
+                   child: Ink(
+                    decoration: BoxDecoration(
+                    gradient:
+                    const LinearGradient(colors: [Color(0xff4ABB47), Color(0xff97D136)]),
+                borderRadius: BorderRadius.circular(20)),
+                     child: Container(
+              width: 500,
+              height: 200,
+              alignment: Alignment.center,
+              child: const Text(
+                'Sign Up',
+                style:
+                    const TextStyle(fontSize: 24,),
+              ),
+            ),
+          ),
+        ),
+      ),
+              ),
                     SizedBox(height: 10),
                      SocialLoginButton(
                 buttonType: SocialLoginButtonType.facebook,
@@ -192,7 +191,6 @@ class Customshape extends CustomClipper<Path>{
   }
   @override
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    // TODO: implement shouldReclip
     return true;
   }
 }

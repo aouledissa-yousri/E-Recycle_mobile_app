@@ -79,7 +79,7 @@ final List<GridData> gridlist = [
   GridData("Organics", Image(image: AssetImage('assets/images/apple.png')),),
   GridData("Glass", Image(image: AssetImage('assets/images/glass.png')),),
   GridData("Metal", Image(image: AssetImage('assets/images/metal.png')),),
-  GridData("Paper", Image(image: AssetImage('assets/images/glass.png')),),
+  GridData("Paper", Image(image: AssetImage('assets/images/paper.png')),),
   GridData("Other", Image(image: AssetImage('assets/images/other.png')),),
 
 ];
