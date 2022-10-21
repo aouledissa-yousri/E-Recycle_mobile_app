@@ -1,4 +1,4 @@
-import 'package:e_recycle/pages/home.dart';
+import 'package:e_recycle/pages/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';

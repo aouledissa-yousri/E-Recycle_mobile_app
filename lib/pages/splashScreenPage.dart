@@ -1,4 +1,4 @@
-import 'package:e_recycle/pages/signup.dart';
+import 'package:e_recycle/pages/signUpPage.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter_native_splash/flutter_native_splash.dart';

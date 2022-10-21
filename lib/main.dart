@@ -1,12 +1,7 @@
-import 'package:e_recycle/pages/splashScreen.dart';
+import 'package:e_recycle/pages/splashScreenPage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'dart:async';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-
-
-import 'pages/home.dart';
 
 void main() {
   runApp(const MyApp());

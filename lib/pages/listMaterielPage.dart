@@ -1,8 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class ListMaterial extends StatefulWidget {
+  const ListMaterial({Key? key}) : super(key: key);
+
   @override
   _ListMaterialState createState() => _ListMaterialState();
 }
@@ -97,6 +97,5 @@ class Customshape extends CustomClipper<Path>{
   }
   @override
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    // TODO: implement shouldReclip
     return true;
   }}
