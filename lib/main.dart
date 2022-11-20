@@ -1,3 +1,4 @@
+import 'package:e_recycle_mobile_app/display/pages/loadingSplashScreenPages/LoadingPage.dart';
 import "package:flutter/material.dart";
 
 void main(){
@@ -19,7 +20,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Center()
+        body: LoadingPage()
       )
     );
   }
@@ -28,3 +29,5 @@ class _MyAppState extends State<MyApp> {
 
 
 }
+
+
