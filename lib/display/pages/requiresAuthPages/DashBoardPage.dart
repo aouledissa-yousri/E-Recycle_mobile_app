@@ -1,5 +1,7 @@
 import 'package:e_recycle_mobile_app/display/pages/requiresAuthPages/AccountSettingsPage.dart';
 import 'package:e_recycle_mobile_app/display/pages/requiresAuthPages/MakeRecycleRequestPage.dart';
+import 'package:e_recycle_mobile_app/display/pages/requiresAuthPages/collectorExclusivePages/CompleteRecycleRequestPage.dart';
+import 'package:e_recycle_mobile_app/display/pages/requiresAuthPages/collectorExclusivePages/MaterialListPage.dart';
 import 'package:flutter/material.dart';
 import 'CitizenRecycleRequestPage.dart';
 import 'NotificationsPage.dart';
@@ -16,6 +18,8 @@ class _DashBoardPageState extends State<DashBoardPage> {
 
   int _currentIndex = 0;
   Widget currentPage = CitizenRecycleRequestPage();
+  bool isCollector = true;
+
 
   
 
@@ -28,13 +32,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
         fixedColor: Colors.white,
         currentIndex: this._currentIndex,
         type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: "Recycle request list"),
-          BottomNavigationBarItem(icon: Icon(Icons.send), label: "Make recycle request"),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications), label: "Notifications"),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
-        ],
-
+        items: addNavbarItem(),
         onTap: (index) {
           setCurrentIndex(index);
           changePage(index);
@@ -68,8 +66,37 @@ class _DashBoardPageState extends State<DashBoardPage> {
       case 3: 
         this.accountSettings();
         return;
+      
+      case 4: 
+        this.acceptedRecycleRequests();
+        return;
+      
+      case 5: 
+        this.materialList();
+        return;
 
     }
+  }
+
+
+  List<BottomNavigationBarItem> addNavbarItem(){
+    List<BottomNavigationBarItem> items = <BottomNavigationBarItem>[];
+
+    items.addAll(
+      [
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: "Recycle request list"),
+          BottomNavigationBarItem(icon: Icon(Icons.send), label: "Make recycle request"),
+          BottomNavigationBarItem(icon: Icon(Icons.notifications), label: "Notifications"),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
+      ]
+    );
+
+    if(this.isCollector) items.addAll([
+      BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: "Accepted recycle requests"),
+      BottomNavigationBarItem(icon: Icon(Icons.add), label: "Material list"),
+    ]);
+
+    return items;
   }
 
 
@@ -88,5 +115,13 @@ class _DashBoardPageState extends State<DashBoardPage> {
 
   void accountSettings(){
     setState(() => this.currentPage = AccountSettingsPage());
+  }
+
+  void acceptedRecycleRequests(){
+    setState(() => this.currentPage = CompleteRecycleRequestPage());
+  }
+
+  void materialList(){
+    setState(() => this.currentPage = MaterialListPage());
   }
 }
