@@ -1,4 +1,8 @@
-import 'package:e_recycle_mobile_app/display/pages/loadingSplashScreenPages/LoadingPage.dart';
+import 'package:e_recycle_mobile_app/display/pages/nonAuthPages/LandingPage.dart';
+import 'package:e_recycle_mobile_app/display/pages/nonAuthPages/PasswordResetPage.dart';
+import 'package:e_recycle_mobile_app/display/pages/requiresAuthPages/DashBoardPage.dart';
+import 'package:e_recycle_mobile_app/display/pages/semiAuthPages/ConfirmationCodePage.dart';
+import 'package:e_recycle_mobile_app/display/pages/semiAuthPages/EnterNewPasswordPage.dart';
 import "package:flutter/material.dart";
 
 void main(){
@@ -20,7 +24,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: LoadingPage()
+        body: LandingPage()
       )
     );
   }

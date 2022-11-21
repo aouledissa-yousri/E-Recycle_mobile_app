@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 
 
-class CollectorSignUpPage extends StatefulWidget {
-  const CollectorSignUpPage({super.key});
+class CollecotrLoginPage extends StatefulWidget {
+  const CollecotrLoginPage({super.key});
 
 
   @override
-  State<CollectorSignUpPage> createState() => _CollectorSignUpPageState();
+  State<CollecotrLoginPage> createState() => _CollecotrLoginPageState();
 }
 
-class _CollectorSignUpPageState extends State<CollectorSignUpPage> {
+class _CollecotrLoginPageState extends State<CollecotrLoginPage> {
 
-
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController lastnameController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   bool loginButton = false;
@@ -25,10 +21,7 @@ class _CollectorSignUpPageState extends State<CollectorSignUpPage> {
   @override
   void dispose(){
     super.dispose();
-    this.nameController.dispose();
-    this.lastnameController.dispose();
     this.usernameController.dispose();
-    this.emailController.dispose();
     this.passwordController.dispose();
   }
 
@@ -41,46 +34,16 @@ class _CollectorSignUpPageState extends State<CollectorSignUpPage> {
       child: Column(
         children: [
 
-
-          
-          TextField(
-            decoration: InputDecoration(
-              hintText: "Enter name",
-              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 8, 221, 193)))
-            ),
-            controller: nameController,
-            onChanged: (text){this.activateSignUp();},
-          ),
-
-
-
-          TextField(
-            decoration: InputDecoration(
-              hintText: "Enter lastname",
-              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 8, 221, 193)))
-            ),
-            controller: lastnameController,
-            onChanged: (text){this.activateSignUp();},
-          ),
-
-
-          TextField(
-            decoration: InputDecoration(
-              hintText: "Enter email",
-              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 8, 221, 193)))
-            ),
-            controller: emailController,
-            onChanged: (text){this.activateSignUp();},
-          ),
-
+          Image(image: AssetImage("lib/assets/app_logo.png"), height: 100, width: 100),
 
           TextField(
             decoration: InputDecoration(
               hintText: "Enter username",
+              icon: Icon(Icons.person, color: Color.fromARGB(255, 8, 221, 193)),
               focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 8, 221, 193)))
             ),
             controller: usernameController,
-            onChanged: (text){this.activateSignUp();},
+            onChanged: (text){this.activateLogin();},
           ),
 
 
@@ -88,9 +51,10 @@ class _CollectorSignUpPageState extends State<CollectorSignUpPage> {
             obscureText: true,
             decoration: InputDecoration(
               hintText: "Enter password",
+              icon: Icon(Icons.lock, color: Color.fromARGB(255, 8, 221, 193))
             ),
             controller: passwordController, 
-            onChanged: (text){this.activateSignUp();},
+            onChanged: (text){this.activateLogin();},
           ),
 
           Text("   "),
@@ -108,8 +72,8 @@ class _CollectorSignUpPageState extends State<CollectorSignUpPage> {
               ),
 
 
-              child: Text("Sign Up"),
-              onPressed: this.loginButton ? null : () => this.signUp()
+              child: Text("Login"),
+              onPressed: this.loginButton ? null : () => this.login()
             )
           ),
 
@@ -119,7 +83,7 @@ class _CollectorSignUpPageState extends State<CollectorSignUpPage> {
           SizedBox(
             width: double.infinity,
             height: 30,
-            child:  ElevatedButton(
+            child:  ElevatedButton.icon(
               
               style: ButtonStyle(
                 foregroundColor:  MaterialStateProperty.all(Color.fromARGB(255, 255, 255, 255)), 
@@ -129,15 +93,39 @@ class _CollectorSignUpPageState extends State<CollectorSignUpPage> {
                 )
               ),
 
-              child: Text("Reset"),
-              onPressed: this.reset
+              label: Text("Login with Google"),
+              icon: ImageIcon(
+                AssetImage("lib/assets/google.png"),
+                color: Color.fromARGB(255, 255, 255, 255),
+                
+              ),
+              onPressed: this.loginButton ? null : () => this.login()
             )
           ),
 
 
           Text("   "),
 
-          
+          SizedBox(
+            width: double.infinity,
+            height: 30,
+            child:  ElevatedButton.icon(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 8, 57, 194)),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(borderRadius:  BorderRadius.circular(20))
+                )
+              ),
+
+              icon: ImageIcon(
+                AssetImage("lib/assets/facebook.png"),
+                color: Color.fromARGB(255, 255, 255, 255),
+              ),
+
+              label: Text("Login with facebook"),
+              onPressed: (){},
+            )
+          )
 
 
         ],
@@ -146,23 +134,20 @@ class _CollectorSignUpPageState extends State<CollectorSignUpPage> {
   }
 
 
-  void activateSignUp(){
+  void activateLogin(){
     setState(){
       if(this.usernameController.text != "" && this.passwordController.text != "") this.loginButton = true;
       else this.loginButton = false;
     }
   }
 
-  void signUp(){
+  void login(){
 
   }
   
 
   void reset(){
     setState(() {
-      this.nameController.text = "";
-      this.lastnameController.text = "";
-      this.emailController.text = "";
       this.usernameController.text = "";
       this.passwordController.text = "";
     });

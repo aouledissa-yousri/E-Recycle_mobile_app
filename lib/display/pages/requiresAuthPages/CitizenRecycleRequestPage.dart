@@ -11,6 +11,8 @@ class CitizenRecycleRequestPage extends StatefulWidget {
 class _CitizenRecycleRequestPageState extends State<CitizenRecycleRequestPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Text("Recycle request list")
+    );
   }
 }
