@@ -2,6 +2,7 @@ import 'package:e_recycle_mobile_app/display/pages/requiresAuthPages/AccountSett
 import 'package:e_recycle_mobile_app/display/pages/requiresAuthPages/MakeRecycleRequestPage.dart';
 import 'package:e_recycle_mobile_app/display/pages/requiresAuthPages/collectorExclusivePages/CompleteRecycleRequestPage.dart';
 import 'package:e_recycle_mobile_app/display/pages/requiresAuthPages/collectorExclusivePages/MaterialListPage.dart';
+import 'package:e_recycle_mobile_app/helpers/DirectoryHelper.dart';
 import 'package:flutter/material.dart';
 import 'CitizenRecycleRequestPage.dart';
 import 'NotificationsPage.dart';
@@ -18,9 +19,14 @@ class _DashBoardPageState extends State<DashBoardPage> {
 
   int _currentIndex = 0;
   Widget currentPage = CitizenRecycleRequestPage();
-  bool isCollector = true;
+  bool isCollector = false;
 
-
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    this.setUserType();
+  }
   
 
   @override
@@ -100,6 +106,13 @@ class _DashBoardPageState extends State<DashBoardPage> {
   }
 
 
+  void setUserType(){
+    DirectoryHelper.getUserData().then((userData) {
+      if(userData["user"]["type"] == "collector") setState(() { this.isCollector = true; });
+    });
+  }
+
+
 
   void recycleRequestList(){
     setState(() => this.currentPage = CitizenRecycleRequestPage());
@@ -124,4 +137,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
   void materialList(){
     setState(() => this.currentPage = MaterialListPage());
   }
+
+
+
 }

@@ -52,5 +52,15 @@ class Citizen {
     this._recycleCoins = recycleCoins;
   }
 
+  dynamic getData(){
+
+    return {
+      "user_profile": this._userProfile.getData(),
+      "name": this._name,
+      "lastname": this._lastname,
+      "recycleCoins": this._recycleCoins
+    };
+  }
+
 
 }

@@ -1,4 +1,10 @@
+import 'dart:convert';
+
+import 'package:e_recycle_mobile_app/models/GenericUser.dart';
+import 'package:e_recycle_mobile_app/services/UserManagementService.dart';
 import 'package:flutter/material.dart';
+
+import '../../../models/Citizen.dart';
 
 
 class CitizenSignUpPage extends StatefulWidget {
@@ -18,7 +24,7 @@ class _CitizenSignUpPageState extends State<CitizenSignUpPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  bool loginButton = false;
+  bool signUpButton = false;
 
 
 
@@ -35,126 +41,166 @@ class _CitizenSignUpPageState extends State<CitizenSignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 100),
-      padding: EdgeInsets.all(20),
-      child: Column(
-        children: [
-
-
-          
-          TextField(
-            decoration: InputDecoration(
-              hintText: "Enter name",
-              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 8, 221, 193)))
-            ),
-            controller: nameController,
-            onChanged: (text){this.activateSignUp();},
-          ),
-
-
-
-          TextField(
-            decoration: InputDecoration(
-              hintText: "Enter lastname",
-              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 8, 221, 193)))
-            ),
-            controller: lastnameController,
-            onChanged: (text){this.activateSignUp();},
-          ),
-
-
-          TextField(
-            decoration: InputDecoration(
-              hintText: "Enter email",
-              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 8, 221, 193)))
-            ),
-            controller: emailController,
-            onChanged: (text){this.activateSignUp();},
-          ),
-
-
-          TextField(
-            decoration: InputDecoration(
-              hintText: "Enter username",
-              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 8, 221, 193)))
-            ),
-            controller: usernameController,
-            onChanged: (text){this.activateSignUp();},
-          ),
-
-
-          TextField(
-            obscureText: true,
-            decoration: InputDecoration(
-              hintText: "Enter password",
-            ),
-            controller: passwordController, 
-            onChanged: (text){this.activateSignUp();},
-          ),
-
-          Text("   "),
-
-          SizedBox(
-            width: double.infinity,
-            height: 30,
-            child:  ElevatedButton(
-              
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 8, 221, 193)),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(borderRadius:  BorderRadius.circular(20))
-                )
+    return Material(
+      child: Container(
+        margin: EdgeInsets.only(top: 50),
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: [
+    
+            Container(
+              padding: EdgeInsets.all(0),
+              child: IconButton(
+                icon: Icon(Icons.arrow_back, size: 30),
+                onPressed: () => back(context)
               ),
-
-
-              child: Text("Sign Up"),
-              onPressed: this.loginButton ? null : () => this.signUp()
-            )
-          ),
-
-          Text("   "),
-
-
-          SizedBox(
-            width: double.infinity,
-            height: 30,
-            child:  ElevatedButton(
-              
-              style: ButtonStyle(
-                foregroundColor:  MaterialStateProperty.all(Color.fromARGB(255, 255, 255, 255)), 
-                backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 199, 0, 0)),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(borderRadius:  BorderRadius.circular(20))
-                )
+              margin: EdgeInsets.only(bottom: 50),
+              alignment: Alignment.topLeft,
+            ),
+            
+            TextField(
+              decoration: InputDecoration(
+                hintText: "Enter name",
+                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 8, 221, 193)))
               ),
-
-              child: Text("Reset"),
-              onPressed: this.reset
-            )
-          ),
-
-
-          Text("   "),
-
-          
-
-
-        ],
-      )
+              controller: nameController,
+              onChanged: (text){this.activateSignUp();},
+            ),
+    
+    
+    
+            TextField(
+              decoration: InputDecoration(
+                hintText: "Enter lastname",
+                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 8, 221, 193)))
+              ),
+              controller: lastnameController,
+              onChanged: (text){this.activateSignUp();},
+            ),
+    
+    
+            TextField(
+              decoration: InputDecoration(
+                hintText: "Enter email",
+                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 8, 221, 193)))
+              ),
+              controller: emailController,
+              onChanged: (text){this.activateSignUp();},
+            ),
+    
+    
+            TextField(
+              decoration: InputDecoration(
+                hintText: "Enter username",
+                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 8, 221, 193)))
+              ),
+              controller: usernameController,
+              onChanged: (text){this.activateSignUp();},
+            ),
+    
+    
+            TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                hintText: "Enter password",
+              ),
+              controller: passwordController, 
+              onChanged: (text){this.activateSignUp();},
+            ),
+    
+            Text("   "),
+    
+            SizedBox(
+              width: double.infinity,
+              height: 30,
+              child:  ElevatedButton(
+                
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 8, 221, 193)),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(borderRadius:  BorderRadius.circular(20))
+                  )
+                ),
+    
+    
+                child: Text("Sign Up"),
+                onPressed: this.signUpButton ? null : () => this.signUp()
+              )
+            ),
+    
+            Text("   "),
+    
+    
+            SizedBox(
+              width: double.infinity,
+              height: 30,
+              child:  ElevatedButton(
+                
+                style: ButtonStyle(
+                  foregroundColor:  MaterialStateProperty.all(Color.fromARGB(255, 255, 255, 255)), 
+                  backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 199, 0, 0)),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(borderRadius:  BorderRadius.circular(20))
+                  )
+                ),
+    
+                child: Text("Reset"),
+                onPressed: this.reset
+              )
+            ),
+    
+    
+            Text("   "),
+    
+            
+    
+    
+          ],
+        )
+      ),
     );
+  }
+
+  bool formIsValid(){
+    return this.usernameController.text != "" && this.passwordController.text != "" && this.emailController != "" && this.nameController != "" && this.lastnameController != "";
   }
 
 
   void activateSignUp(){
-    setState(){
-      if(this.usernameController.text != "" && this.passwordController.text != "") this.loginButton = true;
-      else this.loginButton = false;
-    }
+    if(this.formIsValid()) setState(){this.signUpButton = true;}
+    else setState(){this.signUpButton = false;}
+    
   }
 
   void signUp(){
+    UserManagementService.citizenSignUp(Citizen(
+      GenericUser(this.usernameController.text, this.emailController.text, this.passwordController.text),
+      this.nameController.text,
+      this.lastnameController.text,
+      0
+    )).then((response) {
+      dynamic responseData = jsonDecode(response.body);
 
+
+      showDialog(context: context, builder: (context){
+        
+        return AlertDialog(
+          title: Text(responseData["message"]),
+          content: Text(responseData["message"]),
+          actions: [
+            ElevatedButton(
+              onPressed: Navigator.of(context).pop, 
+              child: Text("OK"),
+              style: ButtonStyle(
+                 backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 8, 221, 193))
+              )
+            )
+          ],
+        );
+      });
+
+
+    });
   }
   
 
@@ -169,6 +215,9 @@ class _CitizenSignUpPageState extends State<CitizenSignUpPage> {
   }
 
 
+  void back(BuildContext context){
+    Navigator.pop(context);
+  }
 
 
 }

@@ -1,6 +1,6 @@
 abstract class Hosts {
 
-  //String gateWayUrl = "http://localhost:3000";
-  String gateWayUrl = "https://e-recycleservicegateway-production.up.railway.app/";
+  static String gatewayUrl = "http://10.0.2.2:3000";
+  //static dynamic gatewayUrl = "https://e-recycleservicegateway-production-788b.up.railway.app";
 
 } 

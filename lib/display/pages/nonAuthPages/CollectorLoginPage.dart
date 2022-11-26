@@ -1,15 +1,22 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
+import '../../../helpers/DirectoryHelper.dart';
+import '../../../services/UserManagementService.dart';
+import '../requiresAuthPages/DashBoardPage.dart';
+import '../semiAuthPages/ConfirmationCodePage.dart';
 
-class CollecotrLoginPage extends StatefulWidget {
-  const CollecotrLoginPage({super.key});
+
+class CollectorLoginPage extends StatefulWidget {
+  const CollectorLoginPage({super.key});
 
 
   @override
-  State<CollecotrLoginPage> createState() => _CollecotrLoginPageState();
+  State<CollectorLoginPage> createState() => _CollectorLoginPageState();
 }
 
-class _CollecotrLoginPageState extends State<CollecotrLoginPage> {
+class _CollectorLoginPageState extends State<CollectorLoginPage> {
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -28,108 +35,110 @@ class _CollecotrLoginPageState extends State<CollecotrLoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 100),
-      padding: EdgeInsets.all(20),
-      child: Column(
-        children: [
-
-          Image(image: AssetImage("lib/assets/app_logo.png"), height: 100, width: 100),
-
-          TextField(
-            decoration: InputDecoration(
-              hintText: "Enter username",
-              icon: Icon(Icons.person, color: Color.fromARGB(255, 8, 221, 193)),
-              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 8, 221, 193)))
-            ),
-            controller: usernameController,
-            onChanged: (text){this.activateLogin();},
-          ),
-
-
-          TextField(
-            obscureText: true,
-            decoration: InputDecoration(
-              hintText: "Enter password",
-              icon: Icon(Icons.lock, color: Color.fromARGB(255, 8, 221, 193))
-            ),
-            controller: passwordController, 
-            onChanged: (text){this.activateLogin();},
-          ),
-
-          Text("   "),
-
-          SizedBox(
-            width: double.infinity,
-            height: 30,
-            child:  ElevatedButton(
-              
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 8, 221, 193)),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(borderRadius:  BorderRadius.circular(20))
-                )
+    return Material(
+      child: Container(
+        margin: EdgeInsets.only(top: 100),
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: [
+    
+            Image(image: AssetImage("lib/assets/app_logo.png"), height: 100, width: 100),
+    
+            TextField(
+              decoration: InputDecoration(
+                hintText: "Enter username",
+                icon: Icon(Icons.person, color: Color.fromARGB(255, 8, 221, 193)),
+                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 8, 221, 193)))
               ),
-
-
-              child: Text("Login"),
-              onPressed: this.loginButton ? null : () => this.login()
-            )
-          ),
-
-          Text("   "),
-
-
-          SizedBox(
-            width: double.infinity,
-            height: 30,
-            child:  ElevatedButton.icon(
-              
-              style: ButtonStyle(
-                foregroundColor:  MaterialStateProperty.all(Color.fromARGB(255, 255, 255, 255)), 
-                backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 199, 0, 0)),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(borderRadius:  BorderRadius.circular(20))
-                )
+              controller: usernameController,
+              onChanged: (text){this.activateLogin();},
+            ),
+    
+    
+            TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                hintText: "Enter password",
+                icon: Icon(Icons.lock, color: Color.fromARGB(255, 8, 221, 193))
               ),
-
-              label: Text("Login with Google"),
-              icon: ImageIcon(
-                AssetImage("lib/assets/google.png"),
-                color: Color.fromARGB(255, 255, 255, 255),
+              controller: passwordController, 
+              onChanged: (text){this.activateLogin();},
+            ),
+    
+            Text("   "),
+    
+            SizedBox(
+              width: double.infinity,
+              height: 30,
+              child:  ElevatedButton(
                 
-              ),
-              onPressed: this.loginButton ? null : () => this.login()
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 8, 221, 193)),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(borderRadius:  BorderRadius.circular(20))
+                  )
+                ),
+    
+    
+                child: Text("Login"),
+                onPressed: this.loginButton ? null : () => this.login()
+              )
+            ),
+    
+            Text("   "),
+    
+    
+            SizedBox(
+              width: double.infinity,
+              height: 30,
+              child:  ElevatedButton.icon(
+                
+                style: ButtonStyle(
+                  foregroundColor:  MaterialStateProperty.all(Color.fromARGB(255, 255, 255, 255)), 
+                  backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 199, 0, 0)),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(borderRadius:  BorderRadius.circular(20))
+                  )
+                ),
+    
+                label: Text("Login with Google"),
+                icon: ImageIcon(
+                  AssetImage("lib/assets/google.png"),
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  
+                ),
+                onPressed: this.loginButton ? null : () => this.login()
+              )
+            ),
+    
+    
+            Text("   "),
+    
+            SizedBox(
+              width: double.infinity,
+              height: 30,
+              child:  ElevatedButton.icon(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 8, 57, 194)),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(borderRadius:  BorderRadius.circular(20))
+                  )
+                ),
+    
+                icon: ImageIcon(
+                  AssetImage("lib/assets/facebook.png"),
+                  color: Color.fromARGB(255, 255, 255, 255),
+                ),
+    
+                label: Text("Login with facebook"),
+                onPressed: (){},
+              )
             )
-          ),
-
-
-          Text("   "),
-
-          SizedBox(
-            width: double.infinity,
-            height: 30,
-            child:  ElevatedButton.icon(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 8, 57, 194)),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(borderRadius:  BorderRadius.circular(20))
-                )
-              ),
-
-              icon: ImageIcon(
-                AssetImage("lib/assets/facebook.png"),
-                color: Color.fromARGB(255, 255, 255, 255),
-              ),
-
-              label: Text("Login with facebook"),
-              onPressed: (){},
-            )
-          )
-
-
-        ],
-      )
+    
+    
+          ],
+        )
+      ),
     );
   }
 
@@ -141,8 +150,37 @@ class _CollecotrLoginPageState extends State<CollecotrLoginPage> {
     }
   }
 
-  void login(){
+  void login() {
+    UserManagementService.login(this.usernameController.text, this.passwordController.text).then((response) async {
+      dynamic responseData = jsonDecode(response.body);
+      if(responseData["message"] == "password is wrong" || responseData["message"] == "user not found" || responseData["message"] == "your account is temporarily blocked please try again later!")
+        showDialog(context: context, builder: (context){
+          
+          return AlertDialog(
+            title: Text("Error"),
+            content: Text(responseData["message"]),
+            actions: [
+              ElevatedButton(
+                onPressed: Navigator.of(context).pop, 
+                child: Text("OK"),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 8, 221, 193))
+                )
+              )
+            ],
+          );
+        });
 
+
+      if(responseData["message"] == "A confirmation code has been sent to your email") Navigator.push(context, MaterialPageRoute(builder: (context) => ConfirmationCodePage()));
+        
+      else {
+        DirectoryHelper.setUserData(responseData);
+        Navigator.push(context, MaterialPageRoute(builder: (context) => DashBoardPage()));
+      }
+
+
+    });
   }
   
 
