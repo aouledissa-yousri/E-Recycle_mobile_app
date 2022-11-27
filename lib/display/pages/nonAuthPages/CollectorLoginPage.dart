@@ -107,7 +107,7 @@ class _CollectorLoginPageState extends State<CollectorLoginPage> {
                   color: Color.fromARGB(255, 255, 255, 255),
                   
                 ),
-                onPressed: this.loginButton ? null : () => this.login()
+                onPressed: this.loginButton ? () => this.login(): null
               )
             ),
     

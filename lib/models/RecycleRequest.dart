@@ -69,4 +69,22 @@ class RecycleRequest {
     this._status = status;
   }
 
+  dynamic getData(){
+
+    return{
+      "material": this._material.getType(),
+      "unit": this._unit,
+      "quantity": this._quantity,
+      "location": this._location,
+      "dateSubmitted": this._dateSubmitted,
+      "status": this._status
+    };
+
+  }
+
+
+  static RecycleRequest createRecycleRequest(String type, double quantity, String unit, String location, String dateSubmitted, String status){
+    return RecycleRequest(Material(type), quantity, unit, location, dateSubmitted, status);
+  }
+
 }

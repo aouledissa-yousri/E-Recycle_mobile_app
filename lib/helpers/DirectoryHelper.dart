@@ -21,6 +21,12 @@ abstract class  DirectoryHelper {
     return userData;
   }
 
+  static Future<String> getToken() async {
+    String appDir = await DirectoryHelper.getBaseDir();
+    dynamic userData = jsonDecode(File("${appDir}/localStorage.json").readAsStringSync());
+    return userData["token"]; 
+  }
+
 
   static void deleteUserData() async {
     String appDir = await DirectoryHelper.getBaseDir();

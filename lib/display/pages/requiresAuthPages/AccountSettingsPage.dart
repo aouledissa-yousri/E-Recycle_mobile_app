@@ -48,7 +48,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
             leading: Text("Log out from all sessions"),
             trailing: IconButton(
                 icon: Icon(Icons.logout, color: Color.fromARGB(255, 8, 221, 193)),
-                onPressed: () => logout()
+                onPressed: () => logoutAllSessions()
               ),
           ),
 
@@ -58,7 +58,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
             leading: Text("Log out from all other sessions"),
             trailing: IconButton(
                 icon: Icon(Icons.logout, color: Color.fromARGB(255, 8, 221, 193)),
-                onPressed: () => logout()
+                onPressed: () => logoutAllOtherSessions()
               ),
           ),
 
@@ -79,6 +79,20 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
 
   logout(){
     UserManagementService.logout(userData["token"]);
+    DirectoryHelper.deleteUserData();
+    Navigator.pop(context);
+    Navigator.push(context, MaterialPageRoute(builder: (context) => LandingPage()));
+  }
+
+  logoutAllSessions(){
+    UserManagementService.logoutAllSessions(userData["token"]);
+    DirectoryHelper.deleteUserData();
+    Navigator.pop(context);
+    Navigator.push(context, MaterialPageRoute(builder: (context) => LandingPage()));
+  }
+
+  logoutAllOtherSessions(){
+    UserManagementService.logoutAllOtherSessions(userData["token"]);
     DirectoryHelper.deleteUserData();
     Navigator.pop(context);
     Navigator.push(context, MaterialPageRoute(builder: (context) => LandingPage()));

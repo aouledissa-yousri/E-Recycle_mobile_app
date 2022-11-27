@@ -124,7 +124,7 @@ class _CitizenSignUpPageState extends State<CitizenSignUpPage> {
     
     
                 child: Text("Sign Up"),
-                onPressed: this.signUpButton ? null : () => this.signUp()
+                onPressed: this.signUpButton ? () => this.signUp() : null
               )
             ),
     

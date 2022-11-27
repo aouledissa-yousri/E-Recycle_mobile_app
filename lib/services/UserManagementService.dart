@@ -1,9 +1,6 @@
 import 'dart:collection';
 import 'dart:convert';
-
 import 'package:e_recycle_mobile_app/Hosts.dart';
-
-import '../display/alertBoxes/ResultAlertBox.dart';
 import '../models/Citizen.dart';
 import 'package:http/http.dart' as http;
 
@@ -34,8 +31,12 @@ abstract class UserManagementService {
   }
 
 
-  static dynamic logoutAllSessions(){}
-  static dynamic logoutAllOtherSessions(){}
+  static dynamic logoutAllSessions(String token) async{
+    return await http.delete(Uri.parse(Hosts.gatewayUrl+"/logoutAllSessions"), headers: {"Content-type": "application/json", "Token" : token});
+  }
+  static dynamic logoutAllOtherSessions(String token) async{
+    return await http.delete(Uri.parse(Hosts.gatewayUrl+"/logoutAllOtherSessions"), headers: {"Content-type": "application/json", "Token" : token});
+  }
 
 
 
@@ -44,8 +45,7 @@ abstract class UserManagementService {
 
   }
 
-  static ResultAlertBox manageTwoFactorAuth(){
-    return ResultAlertBox();
+  static void manageTwoFactorAuth(){
   }
 
   static dynamic twoFactorAuth(String code){}

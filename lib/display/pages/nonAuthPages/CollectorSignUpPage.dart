@@ -124,7 +124,7 @@ class _CollectorSignUpPageState extends State<CollectorSignUpPage> {
     
     
                 child: Text("Sign Up"),
-                onPressed: this.loginButton ? null : () => this.signUp()
+                onPressed: this.loginButton ? () => this.signUp(): null
               )
             ),
     

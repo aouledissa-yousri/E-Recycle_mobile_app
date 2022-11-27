@@ -92,7 +92,7 @@ class _CitizenLoginPageState extends State<CitizenLoginPage> {
     
     
                 child: Text("Login"),
-                onPressed: this.loginButton ? null : () => this.login()
+                onPressed: this.loginButton ? () => this.login() : null
               )
             ),
     
