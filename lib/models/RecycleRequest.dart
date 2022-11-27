@@ -2,6 +2,7 @@ import 'package:e_recycle_mobile_app/models/Material.dart';
 
 class RecycleRequest {
 
+  int _id = 0;
   Material _material = new Material("");
   double _quantity = 0;
   String _unit = "";
@@ -19,6 +20,21 @@ class RecycleRequest {
     this._status = status;
 
   }
+
+  RecycleRequest.fromServer(int id, Material material, double quantity, String unit, String location, String dateSubmitted, String status){
+    this._id = id;
+    this._material = material;
+    this._quantity = quantity;
+    this._unit = unit;
+    this._location = location;
+    this._dateSubmitted = dateSubmitted;
+    this._status = status;
+  }
+
+  int getId(){
+    return this._id;
+  }
+  
 
   Material getMaterial() {
     return this._material;
@@ -85,6 +101,10 @@ class RecycleRequest {
 
   static RecycleRequest createRecycleRequest(String type, double quantity, String unit, String location, String dateSubmitted, String status){
     return RecycleRequest(Material(type), quantity, unit, location, dateSubmitted, status);
+  }
+
+  static RecycleRequest fetchRecycleRequestFromServer(int id, String type, double quantity, String unit, String location, String dateSubmitted, String status){
+    return RecycleRequest.fromServer(id, Material(type), quantity, unit, location, dateSubmitted, status);
   }
 
 }

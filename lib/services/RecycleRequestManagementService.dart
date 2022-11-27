@@ -19,7 +19,8 @@ abstract class RecycleRequestManagementService {
     return await http.post(Uri.parse(Hosts.gatewayUrl+"/makeRecycleRequest"), headers: {"Content-type": "application/json", "Token" : token}, body: json.encode(recycleRequest.getData()));
   }
 
-  static void withdrawRecycleRequest(RecycleRequest recycleRequest, String token) {
+  static Future<http.Response> withdrawRecycleRequest(int recycleRequestId, String token) async {
+    return await http.delete(Uri.parse(Hosts.gatewayUrl+"/withdrawRecycleRequest"), headers: {"Content-type": "application/json", "Token" : token}, body: json.encode({"id": recycleRequestId}));
   }
 
   static void validateRecyckeRequest(RecycleRequest recycleRequest, String token) {
@@ -30,8 +31,8 @@ abstract class RecycleRequestManagementService {
 
   
   //the recycle requests that the citizen made
-  static List<RecycleRequest> getRecycleRequestsMade(RecycleRequest recycleRequest, String token) {
-    return <RecycleRequest>[];
+  static Future<http.Response> getRecycleRequestsMade(String token) async{
+    return await http.get(Uri.parse(Hosts.gatewayUrl+"/getRecycleRequests"), headers: {"Content-type": "application/json", "Token" : token});
   }
 
   //all recycle requests made that are pending

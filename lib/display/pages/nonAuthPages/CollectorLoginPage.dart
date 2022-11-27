@@ -144,10 +144,12 @@ class _CollectorLoginPageState extends State<CollectorLoginPage> {
 
 
   void activateLogin(){
-    setState(){
-      if(this.usernameController.text != "" && this.passwordController.text != "") this.loginButton = true;
-      else this.loginButton = false;
-    }
+   void activateLogin(){
+    if(this.usernameController.text != "" && this.passwordController.text != "") 
+      setState(() => this.loginButton = true);
+    
+    else setState(() => this.loginButton = false);
+  }
   }
 
   void login() {

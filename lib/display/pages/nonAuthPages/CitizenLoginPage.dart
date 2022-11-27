@@ -155,10 +155,10 @@ class _CitizenLoginPageState extends State<CitizenLoginPage> {
 
 
   void activateLogin(){
-    setState(){
-      if(this.usernameController.text != "" && this.passwordController.text != "") this.loginButton = true;
-      else this.loginButton = false;
-    }
+    if(this.usernameController.text != "" && this.passwordController.text != "") 
+      setState(() => this.loginButton = true);
+    
+    else setState(() => this.loginButton = false);
   }
 
   void login() {

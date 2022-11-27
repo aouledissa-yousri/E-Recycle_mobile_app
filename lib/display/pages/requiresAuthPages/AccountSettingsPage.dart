@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:e_recycle_mobile_app/display/pages/nonAuthPages/CitizenLoginPage.dart';
@@ -30,43 +31,44 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: 50, left: 20, right: 20),
-      child: ListView(
-        children: [
-          Text(userData["user"]["name"] + " " + userData["user"]["lastname"], textAlign: TextAlign.center, style: TextStyle(fontSize: 30)),
-          Text("  \n   "),
-          ListTile(
-            leading: Text("Log out"),
-            trailing: IconButton(
-                icon: Icon(Icons.logout, color: Color.fromARGB(255, 8, 221, 193)),
-                onPressed: () => logout()
-              ),
-          ),
+      child: this.userData.isEmpty? Center(child: CircularProgressIndicator(color: Color.fromARGB(255, 8, 221, 193))) :
+        ListView(
+          children: [
+            Text(userData["user"]["name"] + " " + userData["user"]["lastname"], textAlign: TextAlign.center, style: TextStyle(fontSize: 30)),
+            Text("  \n   "),
+            ListTile(
+              leading: Text("Log out"),
+              trailing: IconButton(
+                  icon: Icon(Icons.logout, color: Color.fromARGB(255, 8, 221, 193)),
+                  onPressed: () => logout()
+                ),
+            ),
 
-          Divider(color: Color.fromARGB(255, 39, 39, 39), endIndent: 16, indent: 16),
+            Divider(color: Color.fromARGB(255, 39, 39, 39), endIndent: 16, indent: 16),
 
-          ListTile(
-            leading: Text("Log out from all sessions"),
-            trailing: IconButton(
-                icon: Icon(Icons.logout, color: Color.fromARGB(255, 8, 221, 193)),
-                onPressed: () => logoutAllSessions()
-              ),
-          ),
+            ListTile(
+              leading: Text("Log out from all sessions"),
+              trailing: IconButton(
+                  icon: Icon(Icons.logout, color: Color.fromARGB(255, 8, 221, 193)),
+                  onPressed: () => logoutAllSessions()
+                ),
+            ),
 
-          Divider(color: Color.fromARGB(255, 39, 39, 39), endIndent: 16, indent: 16),
+            Divider(color: Color.fromARGB(255, 39, 39, 39), endIndent: 16, indent: 16),
 
-          ListTile(
-            leading: Text("Log out from all other sessions"),
-            trailing: IconButton(
-                icon: Icon(Icons.logout, color: Color.fromARGB(255, 8, 221, 193)),
-                onPressed: () => logoutAllOtherSessions()
-              ),
-          ),
+            ListTile(
+              leading: Text("Log out from all other sessions"),
+              trailing: IconButton(
+                  icon: Icon(Icons.logout, color: Color.fromARGB(255, 8, 221, 193)),
+                  onPressed: () => logoutAllOtherSessions()
+                ),
+            ),
 
-          Divider(color: Color.fromARGB(255, 39, 39, 39), endIndent: 16, indent: 16),
+            Divider(color: Color.fromARGB(255, 39, 39, 39), endIndent: 16, indent: 16),
 
 
-        ],
-      )
+          ],
+        )
     );
   }
 
@@ -92,9 +94,26 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
   }
 
   logoutAllOtherSessions(){
-    UserManagementService.logoutAllOtherSessions(userData["token"]);
-    DirectoryHelper.deleteUserData();
-    Navigator.pop(context);
-    Navigator.push(context, MaterialPageRoute(builder: (context) => LandingPage()));
+    UserManagementService.logoutAllOtherSessions(userData["token"]).then((response) {
+
+      dynamic responseData = jsonDecode(response.body);
+
+      showDialog(context: context, builder: (context){
+        return AlertDialog(
+          title: Text("Success"),
+          content: Text(responseData["message"]),
+          actions: [
+            ElevatedButton(
+              onPressed: Navigator.of(context).pop, 
+              child: Text("OK"),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 8, 221, 193))
+              )
+            )
+          ],
+        );
+      });
+
+    });
   }
 }
